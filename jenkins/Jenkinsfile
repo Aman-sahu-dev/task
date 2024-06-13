@@ -1,10 +1,14 @@
 pipeline{
     agent any
     stages{
-        stage('Build'){
-            steps{
-                echo "Hello"
-                echo "Hello from auto-build"
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Verify Package') {
+            steps {
+                sh 'ls -l target/'
             }
         }
     }
