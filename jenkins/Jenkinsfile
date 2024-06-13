@@ -11,5 +11,16 @@ pipeline{
                 sh 'ls -l target/'
             }
         }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                    echo 'Test Completed!!'
+                }
+            }
+        }
     }
 }
