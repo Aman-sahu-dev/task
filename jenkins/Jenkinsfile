@@ -39,6 +39,7 @@ pipeline{
         }
         stage('Push Docker Image') {
             steps {
+                echo 'Pushing started!'
                 script {
                     docker.withRegistry('', "${env.DOCKER_CREDENTIALS_ID}") {
                     docker.image("${env.REGISTRY}/build:${env.BUILD_ID}").push()
