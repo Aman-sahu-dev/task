@@ -32,7 +32,7 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("${env.REGISTRY}/build:${env.BUILD_ID}")
+                    docker.build("${env.REGISTRY}:${env.BUILD_ID}")
                 }
                 echo 'Image Created!!'
             }
@@ -43,7 +43,7 @@ pipeline{
                 script {
                     try {
                         docker.withRegistry('', "${env.DOCKERHUB_CREDENTIALS_ID}") {
-                            docker.image("${env.REGISTRY}/build:${env.BUILD_ID}").push()
+                            docker.image("${env.REGISTRY}:${env.BUILD_ID}").push()
                         }
                         echo 'Docker image pushed successfully.'
                     } catch (Exception e) {
